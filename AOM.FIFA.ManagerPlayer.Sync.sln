@@ -1,0 +1,84 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32319.34
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{2E61D124-7684-4662-9F43-84E9D7B8329A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1.Presentation", "1.Presentation", "{A2E31D09-4935-4F6E-8676-67FD256B6733}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2.Application", "2.Application", "{12207F1E-42C2-4190-9184-279160486750}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Gateway", "Gateway", "{B87DEE8F-C319-464B-9918-6CDE2270138F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Persistence", "Persistence", "{A174499F-FE52-4CD4-ACC2-26726AD96A75}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3.Infrastructure", "3.Infrastructure", "{A96BD307-1C85-428D-82CC-0DB6F2CD886D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AOM.FIFAManagerPlayer.Sync.API", "src\AOM.FIFAManagerPlayer.Sync.API\AOM.FIFAManagerPlayer.Sync.API.csproj", "{3FFB50DE-0AFA-4EED-A54D-BE8EE1195EA2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AOM.FIFA.ManagerPlayer.Sync.Gateway", "src\AOM.FIFA.ManagerPlayer.Sync.Gateway\AOM.FIFA.ManagerPlayer.Sync.Gateway.csproj", "{FA0DD2F3-BD3F-4B8F-B471-1F60A7FF5CD1}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AOM.FIFA.ManagerPlayer.Sync.Application", "src\AOM.FIFA.ManagerPlayer.Sync.Application\AOM.FIFA.ManagerPlayer.Sync.Application.csproj", "{81AC1ECE-D072-4719-9CFA-49433CA5209B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AOM.FIFA.ManagerPlayer.Sync.Persistence", "src\AOM.FIFA.ManagerPlayer.Sync.Persistence\AOM.FIFA.ManagerPlayer.Sync.Persistence.csproj", "{E00ABE14-48F9-4092-807A-15C80B89D8B0}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AOM.FIFA.ManagerPlayer.Sync.Application.gRPCClient", "src\AOM.FIFA.ManagerPlayer.Sync.Application.gRPCClient\AOM.FIFA.ManagerPlayer.Sync.Application.gRPCClient.csproj", "{00FCCA85-353F-41D2-81E8-7C45442B4F54}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AOM.FIFA.ManagerPlayer.Sync.Application.Jobs", "src\AOM.FIFA.ManagerPlayer.Sync.Application.Jobs\AOM.FIFA.ManagerPlayer.Sync.Application.Jobs.csproj", "{24C1D989-A1C5-4103-BC53-69D2A8BA5A15}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{51B4786C-F3DE-4017-A0F0-A57554C0E4A1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B2033E4F-94CB-4FDB-BC4A-29CC50E6F194}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3FFB50DE-0AFA-4EED-A54D-BE8EE1195EA2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3FFB50DE-0AFA-4EED-A54D-BE8EE1195EA2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3FFB50DE-0AFA-4EED-A54D-BE8EE1195EA2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3FFB50DE-0AFA-4EED-A54D-BE8EE1195EA2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FA0DD2F3-BD3F-4B8F-B471-1F60A7FF5CD1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA0DD2F3-BD3F-4B8F-B471-1F60A7FF5CD1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FA0DD2F3-BD3F-4B8F-B471-1F60A7FF5CD1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FA0DD2F3-BD3F-4B8F-B471-1F60A7FF5CD1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{81AC1ECE-D072-4719-9CFA-49433CA5209B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{81AC1ECE-D072-4719-9CFA-49433CA5209B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{81AC1ECE-D072-4719-9CFA-49433CA5209B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{81AC1ECE-D072-4719-9CFA-49433CA5209B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E00ABE14-48F9-4092-807A-15C80B89D8B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E00ABE14-48F9-4092-807A-15C80B89D8B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E00ABE14-48F9-4092-807A-15C80B89D8B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E00ABE14-48F9-4092-807A-15C80B89D8B0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{00FCCA85-353F-41D2-81E8-7C45442B4F54}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{00FCCA85-353F-41D2-81E8-7C45442B4F54}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{00FCCA85-353F-41D2-81E8-7C45442B4F54}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{00FCCA85-353F-41D2-81E8-7C45442B4F54}.Release|Any CPU.Build.0 = Release|Any CPU
+		{24C1D989-A1C5-4103-BC53-69D2A8BA5A15}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{24C1D989-A1C5-4103-BC53-69D2A8BA5A15}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{24C1D989-A1C5-4103-BC53-69D2A8BA5A15}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{24C1D989-A1C5-4103-BC53-69D2A8BA5A15}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A2E31D09-4935-4F6E-8676-67FD256B6733} = {2E61D124-7684-4662-9F43-84E9D7B8329A}
+		{12207F1E-42C2-4190-9184-279160486750} = {2E61D124-7684-4662-9F43-84E9D7B8329A}
+		{B87DEE8F-C319-464B-9918-6CDE2270138F} = {A96BD307-1C85-428D-82CC-0DB6F2CD886D}
+		{A174499F-FE52-4CD4-ACC2-26726AD96A75} = {A96BD307-1C85-428D-82CC-0DB6F2CD886D}
+		{A96BD307-1C85-428D-82CC-0DB6F2CD886D} = {2E61D124-7684-4662-9F43-84E9D7B8329A}
+		{3FFB50DE-0AFA-4EED-A54D-BE8EE1195EA2} = {A2E31D09-4935-4F6E-8676-67FD256B6733}
+		{FA0DD2F3-BD3F-4B8F-B471-1F60A7FF5CD1} = {B87DEE8F-C319-464B-9918-6CDE2270138F}
+		{81AC1ECE-D072-4719-9CFA-49433CA5209B} = {12207F1E-42C2-4190-9184-279160486750}
+		{E00ABE14-48F9-4092-807A-15C80B89D8B0} = {A174499F-FE52-4CD4-ACC2-26726AD96A75}
+		{00FCCA85-353F-41D2-81E8-7C45442B4F54} = {12207F1E-42C2-4190-9184-279160486750}
+		{24C1D989-A1C5-4103-BC53-69D2A8BA5A15} = {12207F1E-42C2-4190-9184-279160486750}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {10537A61-CFF9-4512-A8F1-1DD337CFC5F2}
+	EndGlobalSection
+EndGlobal

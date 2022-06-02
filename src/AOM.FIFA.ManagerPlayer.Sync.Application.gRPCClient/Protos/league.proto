@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+option csharp_namespace = "gRPCLeagueClient";
+
+package league;
+
+
+service League {  
+  rpc InsertLeague (LeagueRequest) returns (LeagueReply);
+}
+
+message LeagueRequest {
+	int32 SourceId = 1;  
+	string Name = 2;
+}
+
+message LeagueReply {
+  int32 Id = 1;
+}

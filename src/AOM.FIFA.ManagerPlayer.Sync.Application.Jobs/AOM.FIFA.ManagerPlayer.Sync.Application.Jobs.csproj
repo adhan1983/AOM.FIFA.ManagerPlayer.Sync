@@ -1,0 +1,13 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\AOM.FIFA.ManagerPlayer.Sync.Application.gRPCClient\AOM.FIFA.ManagerPlayer.Sync.Application.gRPCClient.csproj" />
+		<ProjectReference Include="..\AOM.FIFA.ManagerPlayer.Sync.Application\AOM.FIFA.ManagerPlayer.Sync.Application.csproj" />
+		<ProjectReference Include="..\AOM.FIFA.ManagerPlayer.Sync.Gateway\AOM.FIFA.ManagerPlayer.Sync.Gateway.csproj" />
+	</ItemGroup>
+
+</Project>

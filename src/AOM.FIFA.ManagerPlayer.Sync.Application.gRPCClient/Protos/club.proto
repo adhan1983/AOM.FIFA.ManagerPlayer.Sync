@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+option csharp_namespace = "gRPCClubClient";
+
+import "google/protobuf/wrappers.proto";
+
+package club;
+
+
+service Club {  
+  rpc InsertClub (ClubRequest) returns (ClubReply);
+}
+
+message ClubRequest {
+	int32 SourceId = 1;  
+	int32 SourceLeagueId = 2;
+	string Name = 3;
+}
+
+message ClubReply {
+  int32 Id = 1;
+}

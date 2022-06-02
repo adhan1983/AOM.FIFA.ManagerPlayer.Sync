@@ -1,0 +1,19 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs/AOM.FIFA.ManagerPlayer.Sync/v17
+/src/.vs
+/src/AOM.FIFA.ManagerPlayer.Sync.Application/bin/Debug/net5.0
+/src/AOM.FIFA.ManagerPlayer.Sync.Application/obj
+/src/AOM.FIFA.ManagerPlayer.Sync.Application.gRPCClient/bin/Debug/net5.0
+/src/AOM.FIFA.ManagerPlayer.Sync.Application.gRPCClient/obj
+/src/AOM.FIFA.ManagerPlayer.Sync.Application.Jobs/bin/Debug/net5.0
+/src/AOM.FIFA.ManagerPlayer.Sync.Application.Jobs/obj
+/src/AOM.FIFA.ManagerPlayer.Sync.Gateway/bin/Debug/net5.0
+/src/AOM.FIFA.ManagerPlayer.Sync.Gateway/obj
+/src/AOM.FIFA.ManagerPlayer.Sync.Persistence/bin/Debug/net5.0
+/src/AOM.FIFA.ManagerPlayer.Sync.Persistence/obj/Debug/net5.0
+/src/AOM.FIFA.ManagerPlayer.Sync.Persistence/obj
+/src/AOM.FIFAManagerPlayer.Sync.API/bin/Debug/net5.0
+/src/AOM.FIFAManagerPlayer.Sync.API/obj

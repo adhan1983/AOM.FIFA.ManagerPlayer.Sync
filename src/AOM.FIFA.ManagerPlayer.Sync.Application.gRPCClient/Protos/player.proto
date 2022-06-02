@@ -1,0 +1,42 @@
+syntax = "proto3";
+
+option csharp_namespace = "gRPCPlayerClient";
+
+import "google/protobuf/wrappers.proto";
+
+package player;
+
+
+service Player {  
+  rpc InsertPlayer (PlayerRequest) returns (PlayerReply);
+}
+
+message PlayerRequest {
+	int32 SourceId = 1;  	
+	string Name = 2;
+	string LastName = 3;
+	int32 Age = 4;
+	string CommonName = 5;        
+	int32 Height = 6; 
+    int32 Weight = 7;
+    int32 SourceNationId = 8;
+	google.protobuf.Int32Value SourceClubId = 9;
+    google.protobuf.Int32Value Rarity = 10;
+	string Position = 11;
+	string Foot = 12;
+	string AttackWorkRate = 13;
+	string DefenseWorkRate = 14;
+	string TotalStats = 15;
+	int32 Rating = 16;
+	int32 Pace = 17;
+	int32 Shooting = 18;
+	int32 Passing = 19;
+	int32 Dribbling = 20;
+	int32 Defending = 21;
+	int32 Physicality = 22;	
+	bool IsActive = 23;
+}
+
+message PlayerReply {
+  int32 Id = 1;
+}

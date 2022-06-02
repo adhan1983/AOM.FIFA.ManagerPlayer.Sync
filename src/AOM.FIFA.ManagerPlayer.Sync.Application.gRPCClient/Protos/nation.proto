@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+option csharp_namespace = "gRPCNationClient";
+
+package nation;
+
+
+service Nation {  
+  rpc InsertNation (NationRequest) returns (NationReply);
+}
+
+message NationRequest {
+	int32 SourceId = 1;  
+	string Name = 2;
+}
+
+message NationReply {
+  int32 Id = 1;
+}
