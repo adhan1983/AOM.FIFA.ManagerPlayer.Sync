@@ -66,22 +66,13 @@ namespace AOM.FIFA.ManagerPlayer.Sync.Application.Jobs.Services
                             break;
                         default:
                             continue;                            
-                    }
-
-                    //SyncPageData resultSyncPageData = syncJob.Name switch
-                    //{
-                    //    ApplicationContants.League => await _syncJobLeagueService.SyncJobLeaguesAsync(syncJob.TotalItemsPerPage, syncPageData),
-
-                    //    ApplicationContants.Nation => await _syncJobNationService.SyncJobNationAsync(syncJob.TotalItemsPerPage, syncPageData),
-
-                    //};                   
+                    }                
 
                     syncPageData.SyncPageSuccess = syncPageData.TotalDosNotSynchronized > 0 ? false : true;
                     syncJob.SyncPages.Add(syncPageData);
                     syncJob.Synchronized = (syncJob.SyncPages.Max(a => a.Page) == syncJob.TotalPages);
                     await _syncRepository.UpdateAsync(syncJob);
                 }
-
                 
             }            
 
