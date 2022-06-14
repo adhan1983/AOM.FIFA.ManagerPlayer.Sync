@@ -21,4 +21,10 @@
     <ProjectReference Include="..\AOM.FIFA.ManagerPlayer.Sync.Persistence\AOM.FIFA.ManagerPlayer.Sync.Persistence.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="appsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

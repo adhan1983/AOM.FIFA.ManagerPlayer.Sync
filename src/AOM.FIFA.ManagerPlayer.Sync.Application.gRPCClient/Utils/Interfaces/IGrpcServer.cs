@@ -2,8 +2,9 @@
 
 namespace AOM.FIFA.ManagerPlayer.Sync.Application.gRPCClient.Utils.Interfaces
 {
-    public interface IGrpcChannelClient
+    public interface IGrpcServer
     {
-       string Address { get; set; }
+       string EndPoint { get; set; }        
+        
     }
 }

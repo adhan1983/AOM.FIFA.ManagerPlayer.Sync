@@ -18,11 +18,13 @@ namespace AOM.FIFAManagerPlayer.Sync.API.Controllers
         [HttpGet]        
         public async Task<IActionResult> Get()
         {
-            for (int i = 0; i < 300; i++)
-            {
-                await _syncService.ExecuteJobsAsync();
-                Thread.Sleep(3000);
-            }
+            await _syncService.ExecuteJobsAsync();
+
+            //for (int i = 0; i < 300; i++)
+            //{
+            //    await _syncService.ExecuteJobsAsync();
+            //    Thread.Sleep(3000);
+            //}
 
             return Ok("Ok");
 

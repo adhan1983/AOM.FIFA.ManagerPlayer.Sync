@@ -9,13 +9,13 @@ namespace AOM.FIFA.ManagerPlayer.Sync.Application.gRPCClient.Services
 {
     public class ClubgRPCServiceClient : IClubgRPCServiceClient, IDisposable
     {
-        private readonly IGrpcChannelClient _grpcChannelClient;
+        private readonly IGrpcServer _grpcChannelClient;
         private readonly GrpcChannel channel;
 
-        public ClubgRPCServiceClient(IGrpcChannelClient grpcChannelClient)
+        public ClubgRPCServiceClient(IGrpcServer grpcChannelClient)
         {
             this._grpcChannelClient = grpcChannelClient;            
-            channel = GrpcChannel.ForAddress(_grpcChannelClient.Address);
+            channel = GrpcChannel.ForAddress(_grpcChannelClient.EndPoint);
         }
 
         public void Dispose()

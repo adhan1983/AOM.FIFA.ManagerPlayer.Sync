@@ -24,7 +24,8 @@ namespace AOM.FIFA.ManagerPlayer.Api.Extensions.Build
                 AddingPersistenceDependencies().
                 AddingApplicationgRPCClientDependencies().
                 AddingHttpClientFactory(configuration).
-                AddingGrpcAddress(configuration).                
+                AddingGrpcDependencies(configuration).
+                AddingAuth0Dependencies(configuration).
                 AddingDataBasesDependencies(configuration);
                 //AddingHangFireDependencies(configuration).
         }

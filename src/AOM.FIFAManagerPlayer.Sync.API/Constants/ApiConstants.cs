@@ -19,7 +19,9 @@
         public const string Page = "FIFAUrlQueryString:Page";
         public const string Limit = "FIFAUrlQueryString:Limit";
 
-        public const string GrpcAddress = "GrpcAddress";
+        public const string Address = "GrpcServer:Address";
+
+        public const string Auth0Properties = "Auth0Properties";
 
     }
 }
