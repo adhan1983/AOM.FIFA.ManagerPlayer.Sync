@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using AOM.FIFA.ManagerPlayer.Api.Extensions.Build;
-using Hangfire;
 
 namespace AOM.FIFAManagerPlayer.Jobs.API
 {

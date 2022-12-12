@@ -1,4 +1,6 @@
+using AOM.FIFA.ManagerPlayer.Sync.Application.Jobs.Services;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
 namespace AOM.FIFAManagerPlayer.Jobs.API
@@ -8,18 +10,6 @@ namespace AOM.FIFAManagerPlayer.Jobs.API
         public static void Main(string[] args)
         {
             CreateHostBuilder(args).Build().Run();
-
-            //var context = new ContextStrategy();
-
-            //Console.WriteLine("Client: Strategy is set to normal sorting.");
-            //context.SetStrategy(new ConcreteStrategyA());
-            //context.DoSomeBusinessLogic();
-
-            //Console.WriteLine();
-
-            //Console.WriteLine("Client: Strategy is set to reverse sorting.");
-            //context.SetStrategy(new ConcreteStrategyB());
-            //context.DoSomeBusinessLogic();
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
@@ -27,6 +17,11 @@ namespace AOM.FIFAManagerPlayer.Jobs.API
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
+
+
+                }).ConfigureServices(services =>                 
+                {
+                    services.AddHostedService<WorkerService>();
                 });
     }
 }

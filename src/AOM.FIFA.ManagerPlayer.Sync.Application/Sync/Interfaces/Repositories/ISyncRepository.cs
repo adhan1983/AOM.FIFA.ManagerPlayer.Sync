@@ -7,6 +7,7 @@ namespace AOM.FIFA.ManagerPlayer.Sync.Application.Sync.Interfaces.Repositories
 {
     public interface ISyncRepository : IRepository<SyncData>
     {
+        Task<SyncData> GetSyncByIdAsync(int id);
         Task<List<SyncData>> GetAllSyncDatawithIncludeAsync();
     }
 }

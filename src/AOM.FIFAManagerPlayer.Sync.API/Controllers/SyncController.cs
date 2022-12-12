@@ -19,9 +19,7 @@ namespace AOM.FIFAManagerPlayer.Sync.API.Controllers
         [Route("")]
         public async Task<IActionResult> Get()
         {
-            var response = new SyncListResponse();
-
-            response = await _syncService.GetSynchronizationsAsync();
+            var response = await _syncService.GetSynchronizationsAsync();
 
             return Ok(response);
 
@@ -31,9 +29,7 @@ namespace AOM.FIFAManagerPlayer.Sync.API.Controllers
         [Route("{id}")]
         public async Task<IActionResult> Get(int id)
         {
-            var response = new SyncResponse();
-
-            response = await _syncService.GetSynchronizationsByIdAsync(id);
+            var response = await _syncService.GetSynchronizationsByIdAsync(id);
 
             return Ok(response);
 

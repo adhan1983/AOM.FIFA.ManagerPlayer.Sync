@@ -12,13 +12,13 @@ namespace AOM.FIFA.ManagerPlayer.Sync.Persistence.Repository
     {
         public SyncRepository(FIFASyncDbContext dbContext) : base(dbContext) { }
 
-        public async Task<SyncData> GetSyncByNameAsync(string name)
+        public async Task<SyncData> GetSyncByIdAsync(int id)
         {
             var model = await this._fifaSyncDbContext.
                                 SyncData.
                                     Include(a => a.SyncPages).
                                     ThenInclude(b => b.SourcesWithoutSync).
-                                FirstOrDefaultAsync(a => a.Name == name);
+                                FirstOrDefaultAsync(a => a.Id == id);
 
             return model;
         }

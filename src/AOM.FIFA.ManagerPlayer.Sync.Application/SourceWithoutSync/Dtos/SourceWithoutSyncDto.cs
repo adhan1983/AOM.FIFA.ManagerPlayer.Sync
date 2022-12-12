@@ -4,8 +4,9 @@ namespace AOM.FIFA.ManagerPlayer.Sync.Application.SourceWithoutSync.Dtos
 {
     public class SourceWithoutSyncDto
     {
-        public SourceWithoutSyncDto() => this.TotalSourceIdPerPage = new List<int>();                
-        public List<int> TotalSourceIdPerPage { get; set; }
-        public int  SyncPageId { get; set; }
+        public int Id { get; set; }
+        public int SyncPageId { get; set; }
+        public int SourceId { get; set; }
+        
     }
 }

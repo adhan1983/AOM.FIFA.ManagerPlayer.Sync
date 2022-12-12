@@ -5,9 +5,16 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="SyncPage\Interfaces\Repositories\" />
-    <Folder Include="SyncPage\Interfaces\Services\" />
-    <Folder Include="SyncPage\Services\" />
+    <Compile Remove="SyncPage\Interfaces\**" />
+    <Compile Remove="SyncPage\Services\**" />
+    <EmbeddedResource Remove="SyncPage\Interfaces\**" />
+    <EmbeddedResource Remove="SyncPage\Services\**" />
+    <None Remove="SyncPage\Interfaces\**" />
+    <None Remove="SyncPage\Services\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.0" />
   </ItemGroup>
 
   <ItemGroup>

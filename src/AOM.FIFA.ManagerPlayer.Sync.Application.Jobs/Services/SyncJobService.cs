@@ -6,8 +6,7 @@ using AOM.FIFA.ManagerPlayer.Sync.Application.Jobs.Interfaces;
 using AOM.FIFA.ManagerPlayer.Sync.Application.Sync.Interfaces.Repositories;
 
 namespace AOM.FIFA.ManagerPlayer.Sync.Application.Jobs.Services
-{
-    //BaseSyncJobService
+{    
     public class SyncJobService : ISyncJobService
     {
         private readonly ISyncRepository _syncRepository;
@@ -28,7 +27,7 @@ namespace AOM.FIFA.ManagerPlayer.Sync.Application.Jobs.Services
             this._syncJobClubService = syncJobClubService;
             this._syncJobPlayerService = syncJobPlayerService;
         }
-            //base(syncRepository, syncJobLeagueService, syncJobNationService) { }
+        
         public async Task ExecuteJobsAsync()
         {
             var allSyncJobsData = await _syncRepository.GetAllSyncDatawithIncludeAsync();            

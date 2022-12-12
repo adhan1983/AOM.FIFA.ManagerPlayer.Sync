@@ -3,9 +3,7 @@
     public class ApiConstants
     {        
         public const string ApplyMigrationSyncFIFADbContext = "ApplyMigrationSyncFIFADbContext";
-        public const string SqlSyncConnectionString = "SqlSyncConnectionString";
-        public const string SqlHangFireConectionString = "SqlHangFireConectionString";
-
+        public const string SqlSyncConnectionString = "SqlSyncConnectionString";        
         public const string FIFAApiKey = "FIFAGatewaySettings:FIFAApiKey";
         public const string FIFAApiToken = "FIFAGatewaySettings:FIFAApiToken";
         public const string FIFAClient = "FIFAGatewaySettings:FIFAClient";

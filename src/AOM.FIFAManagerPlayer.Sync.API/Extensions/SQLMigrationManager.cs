@@ -1,6 +1,5 @@
 ﻿using AOM.FIFA.ManagerPlayer.Api.Constants;
 using AOM.FIFA.ManagerPlayer.Sync.Persistence.Context;
-using Hangfire;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -21,13 +20,7 @@ namespace AOM.FIFA.ManagerPlayer.Api.Extensions
                 {
                     var fifaSyncDbContext = scope.ServiceProvider.GetService<FIFASyncDbContext>();
                     fifaSyncDbContext.Database.Migrate();
-                }
-
-                //var _syncService = scope.ServiceProvider.GetService<Sync.Application.Jobs.Interfaces.ISyncJobService>();
-                //RecurringJob.AddOrUpdate(
-                //"FifaJob",
-                //() => _syncService.ExecuteJobsAsync(),
-                //Cron.Minutely);
+                }                
 
             }
         }
