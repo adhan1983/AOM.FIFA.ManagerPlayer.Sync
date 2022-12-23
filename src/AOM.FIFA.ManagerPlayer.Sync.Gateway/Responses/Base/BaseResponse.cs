@@ -1,11 +1,18 @@
 ﻿namespace AOM.FIFA.ManagerPlayer.Sync.Gateway.Responses.Base
 {
     public class BaseResponse
+    {      
+        public Pagination pagination { get; set; }
+    }
+
+    public class Pagination
     {
-        public int count { get; set; }
-        public int count_total { get; set; }
-        public int page { get; set; }
-        public int page_total { get; set; }
-        public int items_per_page { get; set; }
+        public int countCurrent { get; set; }
+        public int countTotal { get; set; }
+        public int pageCurrent { get; set; }
+        public int pageTotal { get; set; }
+        public int itemsPerPage { get; set; }
     }
 }
+
+

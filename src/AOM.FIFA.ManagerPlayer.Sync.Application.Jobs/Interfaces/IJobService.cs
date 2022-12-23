@@ -2,8 +2,9 @@
 
 namespace AOM.FIFA.ManagerPlayer.Sync.Application.Jobs.Interfaces
 {
-    public interface ISyncJobService
+    public interface IJobService
     {
-        Task ExecuteJobsAsync();
+        Task SyncPageAsync();
+        Task ExecuteAllJosbsAsync();
     }
 }

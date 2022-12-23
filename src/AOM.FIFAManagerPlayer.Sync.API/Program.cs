@@ -1,6 +1,4 @@
-using AOM.FIFA.ManagerPlayer.Sync.Application.Jobs.Services;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
 namespace AOM.FIFAManagerPlayer.Jobs.API
@@ -18,10 +16,6 @@ namespace AOM.FIFAManagerPlayer.Jobs.API
                 {
                     webBuilder.UseStartup<Startup>();
 
-
-                }).ConfigureServices(services =>                 
-                {
-                    services.AddHostedService<WorkerService>();
                 });
     }
 }

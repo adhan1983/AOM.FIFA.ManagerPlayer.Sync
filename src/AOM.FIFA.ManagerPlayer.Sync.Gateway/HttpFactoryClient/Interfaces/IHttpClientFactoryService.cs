@@ -8,7 +8,7 @@ using AOM.FIFA.ManagerPlayer.Sync.Gateway.Responses.Player;
 namespace AOM.FIFA.ManagerPlayer.Sync.Gateway.HttpFactoryClient.Interfaces
 {
     public interface IHttpClientFactoryService
-    {
+    {        
         Task<LeagueListResponse> GetLeaguesAsync(Request request);
 
         Task<ClubListResponse> GetClubsAsync(Request request);

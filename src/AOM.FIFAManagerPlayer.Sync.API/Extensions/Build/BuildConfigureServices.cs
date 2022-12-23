@@ -24,11 +24,12 @@ namespace AOM.FIFA.ManagerPlayer.Api.Extensions.Build
                 AddingPersistenceDependencies().
                 AddingApplicationgRPCClientDependencies().
                 AddingAutoMapperDependencies().
+                AddingHangFireServicesDependencies().
                 AddingHttpClientFactory(configuration).
                 AddingGrpcDependencies(configuration).
                 AddingAuth0Dependencies(configuration).
-                AddingDataBasesDependencies(configuration);
-                
+                AddingDataBasesDependencies(configuration).
+                AddingHangiFideDependencies(configuration);               
                 
         }
 

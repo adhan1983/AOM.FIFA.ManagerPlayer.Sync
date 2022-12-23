@@ -1,9 +1,9 @@
-﻿using Grpc.Net.Client;
-using gRPCNationClient;
-using System.Threading.Tasks;
-using AOM.FIFA.ManagerPlayer.Sync.Application.gRPCClient.Services.Interfaces;
+﻿using AOM.FIFA.ManagerPlayer.Sync.Application.gRPCClient.Services.Interfaces;
 using AOM.FIFA.ManagerPlayer.Sync.Application.gRPCClient.Utils.Interfaces;
+using Grpc.Net.Client;
+using gRPCNationClient;
 using System;
+using System.Threading.Tasks;
 
 namespace AOM.FIFA.ManagerPlayer.Sync.Application.gRPCClient.Services
 {

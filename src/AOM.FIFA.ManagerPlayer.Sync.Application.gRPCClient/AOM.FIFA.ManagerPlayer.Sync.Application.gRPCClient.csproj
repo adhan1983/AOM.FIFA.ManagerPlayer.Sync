@@ -4,6 +4,13 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="Protos\club.proto" />
+    <None Remove="Protos\league.proto" />
+    <None Remove="Protos\nation.proto" />
+    <None Remove="Protos\player.proto" />
+  </ItemGroup>
+
 	<ItemGroup>
 		<PackageReference Include="Auth0.AuthenticationApi" Version="5.0.0" />
 		<PackageReference Include="Google.Protobuf" Version="3.19.3" />

@@ -1,12 +1,12 @@
-﻿using AOM.FIFA.ManagerPlayer.Sync.Application.gRPCClient.Services.Interfaces;
+﻿using System;
+using gRPCNationClient;
+using System.Threading.Tasks;
+using AOM.FIFA.ManagerPlayer.Sync.Gateway.Responses.Base;
+using AOM.FIFA.ManagerPlayer.Sync.Application.SyncPage.Data;
 using AOM.FIFA.ManagerPlayer.Sync.Application.Jobs.Interfaces;
 using AOM.FIFA.ManagerPlayer.Sync.Application.SourceWithoutSync.Data;
-using AOM.FIFA.ManagerPlayer.Sync.Application.SyncPage.Data;
 using AOM.FIFA.ManagerPlayer.Sync.Gateway.HttpFactoryClient.Interfaces;
-using AOM.FIFA.ManagerPlayer.Sync.Gateway.Responses.Base;
-using gRPCNationClient;
-using System;
-using System.Threading.Tasks;
+using AOM.FIFA.ManagerPlayer.Sync.Application.gRPCClient.Services.Interfaces;
 
 namespace AOM.FIFA.ManagerPlayer.Sync.Application.Jobs.Services
 {
@@ -20,7 +20,14 @@ namespace AOM.FIFA.ManagerPlayer.Sync.Application.Jobs.Services
         {
             this._httpClientServiceImplementation = httpClientServiceImplementation;
             this._nationRPCServiceClient = nationRPCServiceClient;
-        }        
+        }
+
+        public async Task<Pagination> GetPaginationNationAsync(int totalItemsPerPage)
+        {
+            var response = await _httpClientServiceImplementation.GetNationsAsync(new Request { MaxItemPerPage = totalItemsPerPage, Page = 1 });
+
+            return response.pagination;
+        }
 
         public async Task<SyncPageData> SyncJobNationAsync(int totalItemsPerPage, SyncPageData syncPageData)
         {

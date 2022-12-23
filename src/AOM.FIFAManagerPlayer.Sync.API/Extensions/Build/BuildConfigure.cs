@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using AOM.FIFAManagerPlayer.Sync.API.Extensions;
+using Hangfire;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 
@@ -23,8 +25,13 @@ namespace AOM.FIFA.ManagerPlayer.Api.Extensions.Build
 
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
 
-            app.ApplyMigration();            
-            
+            app.UseHangfireDashboard();
+
+            app.ApplyMigration();
+
+            app.BuildSyncManager();
+
+
         }
     }
 }

@@ -27,6 +27,46 @@ namespace AOM.FIFA.ManagerPlayer.Sync.Gateway.HttpFactoryClient
             this._url = url;
             this._queryString = queryString;
         }
+
+       
+
+        private string BuildUrl(string typeOfRequest, HttpClient httpClient)
+        {
+            string urlRequest = string.Empty;
+            switch (typeOfRequest)
+            {                
+                case "League":
+                    urlRequest = string.Concat(httpClient.BaseAddress, _url.league, _queryString.Page, 1);
+                    break;
+                case "Club":
+                    urlRequest = string.Concat(httpClient.BaseAddress, _url.club);
+                    break;
+                case "Player":
+                    urlRequest = string.Concat(httpClient.BaseAddress, _url.player);
+                    break;
+                case "Nation":
+                    urlRequest = string.Concat(httpClient.BaseAddress, _url.nation);
+                    break;
+                default:
+                    break;
+            }
+
+            return urlRequest;
+        }
+
+        private HttpRequestMessage BuildHttpRequestMessage(string urlRequest)
+        {
+            return new HttpRequestMessage
+            {
+                Method = HttpMethod.Get,
+                RequestUri = new Uri(urlRequest),
+                Headers =
+                    {
+                        { _fifaGatewayConfig.FIFAApiKey , _fifaGatewayConfig.FIFAApiToken },
+                    },
+            };
+        }
+
         public async Task<LeagueListResponse> GetLeaguesAsync(Request request)
         {
             string urlLeague = string.Concat(_url.league, _queryString.Page);
@@ -53,7 +93,7 @@ namespace AOM.FIFA.ManagerPlayer.Sync.Gateway.HttpFactoryClient
             string urlLeague = string.Concat(_url.nation, _queryString.Page);
 
             return await SendRequestAsync<NationListResponse>(request, urlLeague);
-        }
+        }       
 
         private async Task<TResponse> SendRequestAsync<TResponse>(Request request, string url) where TResponse : class
         {
@@ -61,15 +101,7 @@ namespace AOM.FIFA.ManagerPlayer.Sync.Gateway.HttpFactoryClient
             {
                 string urlRequest = string.Concat(httpClient.BaseAddress, url, request.Page, _queryString.Limit, request.MaxItemPerPage);
 
-                var requestMessage = new HttpRequestMessage
-                {
-                    Method = HttpMethod.Get,
-                    RequestUri = new Uri(urlRequest),
-                    Headers =
-                    {
-                        { _fifaGatewayConfig.FIFAApiKey , _fifaGatewayConfig.FIFAApiToken },
-                    },
-                };
+                HttpRequestMessage requestMessage = BuildHttpRequestMessage(urlRequest);
 
                 using (var response = await httpClient.SendAsync(requestMessage, HttpCompletionOption.ResponseHeadersRead))
                 {

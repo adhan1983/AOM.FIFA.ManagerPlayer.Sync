@@ -32,6 +32,13 @@ namespace AOM.FIFA.ManagerPlayer.Sync.Application.Jobs.Services
             this._sourceWithoutSyncService = sourceWithoutSyncService;
         }
 
+        public async Task<Pagination> GetPaginationPlayerAsync(int totalItemsPerPage)
+        {
+            var response = await _httpClientServiceImplementation.GetPlayersAsync(new Request { MaxItemPerPage = totalItemsPerPage, Page = 1 });
+
+            return response.pagination;
+        }
+
         public async Task<SyncPageData> SyncJobPlayerAsync(int totalItemsPerPage, SyncPageData syncPageData)
         {
             var response = await _httpClientServiceImplementation.

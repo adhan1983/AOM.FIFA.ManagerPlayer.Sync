@@ -8,7 +8,7 @@ namespace AOM.FIFA.ManagerPlayer.Api.Extensions.ServicesCollectionDependencies
     {
         public static IServiceCollection AddingApplicationJobsDependencies(this IServiceCollection services)
         {
-            services.AddScoped<ISyncJobService, SyncJobService>();
+            services.AddScoped<IJobService, JobService>();
             services.AddScoped<ISyncJobLeagueService, SyncJobLeagueService>();
             services.AddScoped<ISyncJobNationService, SyncJobNationService>();
             services.AddScoped<ISyncJobClubService, SyncJobClubService>();

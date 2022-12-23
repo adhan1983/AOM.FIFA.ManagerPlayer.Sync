@@ -19,6 +19,14 @@ namespace AOM.FIFA.ManagerPlayer.Sync.Application.Jobs.Services
             this._httpClientServiceImplementation = httpClientServiceImplementation;
             this._leaguegRPCServiceClient = leaguegRPCServiceClient;
         }
+
+
+        public async Task<Pagination> GetPaginationLeagueAsync(int totalItemsPerPage) 
+        {
+            var response = await _httpClientServiceImplementation.GetLeaguesAsync(new Request { MaxItemPerPage = totalItemsPerPage, Page = 1 });
+
+            return response.pagination;
+        }
         public async Task<SyncPageData> SyncJobLeaguesAsync(int totalItemsPerPage, SyncPageData syncPageData)
         {
             var response = await _httpClientServiceImplementation.
