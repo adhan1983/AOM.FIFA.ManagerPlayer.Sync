@@ -1,10 +1,10 @@
 ﻿using Microsoft.OpenApi.Models;
+using System.Collections.Generic;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using AOM.FIFAManagerPlayer.Sync.API.Extensions;
 using AOM.FIFA.ManagerPlayer.Api.Extensions.ServicesCollectionDependencies;
 using AOM.FIFAManagerPlayer.Sync.API.Extensions.ServicesCollectionDependencies;
-using System.Collections.Generic;
 
 namespace AOM.FIFA.ManagerPlayer.Api.Extensions.Build
 {
@@ -57,8 +57,7 @@ namespace AOM.FIFA.ManagerPlayer.Api.Extensions.Build
                 AddingApplicationJobsDependencies().
                 AddingPersistenceDependencies().
                 AddingApplicationgRPCClientDependencies().
-                AddingAutoMapperDependencies().
-                AddingHangFireServicesDependencies().                
+                AddingAutoMapperDependencies().                
                 AddingHttpClientFactory(configuration).
                 AddingGrpcDependencies(configuration).
                 AddingAuth0Dependencies(configuration).

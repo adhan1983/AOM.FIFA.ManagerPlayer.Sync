@@ -1,12 +1,11 @@
 ﻿using System;
+using Microsoft.Extensions.Configuration;
+using AOM.FIFA.ManagerPlayer.Gateway.Utils;
+using AOM.FIFA.ManagerPlayer.Api.Constants;
 using Microsoft.Extensions.DependencyInjection;
 using AOM.FIFA.ManagerPlayer.Sync.Gateway.HttpFactoryClient;
-using AOM.FIFA.ManagerPlayer.Sync.Gateway.HttpFactoryClient.Interfaces;
-using Microsoft.Extensions.Configuration;
-using AOM.FIFA.ManagerPlayer.Api.Constants;
 using AOM.FIFA.ManagerPlayer.Sync.Gateway.Utils.Interfaces;
-using AOM.FIFA.ManagerPlayer.Gateway.Utils;
-
+using AOM.FIFA.ManagerPlayer.Sync.Gateway.HttpFactoryClient.Interfaces;
 
 namespace AOM.FIFA.ManagerPlayer.Api.Extensions
 {

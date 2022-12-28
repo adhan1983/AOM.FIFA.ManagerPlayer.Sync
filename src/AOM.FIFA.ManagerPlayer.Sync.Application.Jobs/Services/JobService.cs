@@ -2,11 +2,10 @@
 using System.Threading.Tasks;
 using AOM.FIFA.ManagerPlayer.Sync.Application.Sync.Data;
 using AOM.FIFA.ManagerPlayer.Sync.Gateway.Responses.Base;
-using AOM.FIFA.ManagerPlayer.Sync.Application.Base.Contants;
 using AOM.FIFA.ManagerPlayer.Sync.Application.SyncPage.Data;
+using AOM.FIFA.ManagerPlayer.Sync.Application.Base.Contants;
 using AOM.FIFA.ManagerPlayer.Sync.Application.Jobs.Interfaces;
 using AOM.FIFA.ManagerPlayer.Sync.Application.Sync.Interfaces.Repositories;
-using System;
 
 namespace AOM.FIFA.ManagerPlayer.Sync.Application.Jobs.Services
 {
