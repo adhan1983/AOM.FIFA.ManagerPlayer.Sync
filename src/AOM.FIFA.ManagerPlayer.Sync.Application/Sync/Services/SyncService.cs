@@ -40,5 +40,6 @@ namespace AOM.FIFA.ManagerPlayer.Sync.Application.Sync.Services
 
             return response;
         }
+
     }
 }

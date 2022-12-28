@@ -21,6 +21,7 @@ namespace AOM.FIFA.ManagerPlayer.Api.Extensions.Build
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();            
 
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
@@ -30,6 +31,8 @@ namespace AOM.FIFA.ManagerPlayer.Api.Extensions.Build
             app.ApplyMigration();
 
             app.BuildSyncManager();
+
+            app.AddingCacheDependencies();
 
 
         }

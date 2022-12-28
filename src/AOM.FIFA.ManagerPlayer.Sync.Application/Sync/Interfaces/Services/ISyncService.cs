@@ -7,5 +7,6 @@ namespace AOM.FIFA.ManagerPlayer.Sync.Application.Sync.Interfaces.Services
     {
         Task<SyncListResponse> GetSynchronizationsAsync();
         Task<SyncResponse> GetSynchronizationsByIdAsync(int id);
+
     }
 }

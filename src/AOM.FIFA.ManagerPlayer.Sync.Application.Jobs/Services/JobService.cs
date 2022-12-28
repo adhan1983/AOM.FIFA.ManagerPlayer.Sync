@@ -6,6 +6,7 @@ using AOM.FIFA.ManagerPlayer.Sync.Application.Base.Contants;
 using AOM.FIFA.ManagerPlayer.Sync.Application.SyncPage.Data;
 using AOM.FIFA.ManagerPlayer.Sync.Application.Jobs.Interfaces;
 using AOM.FIFA.ManagerPlayer.Sync.Application.Sync.Interfaces.Repositories;
+using System;
 
 namespace AOM.FIFA.ManagerPlayer.Sync.Application.Jobs.Services
 {
@@ -28,60 +29,22 @@ namespace AOM.FIFA.ManagerPlayer.Sync.Application.Jobs.Services
             this._syncJobNationService = syncJobNationService;
             this._syncJobClubService = syncJobClubService;
             this._syncJobPlayerService = syncJobPlayerService;
-        }
+        }               
 
-        public async Task SyncPageAsync()
-        {
-            var allSyncJobsData = await _syncRepository.GetAllSyncDatawithIncludeAsync();
-
-            if (!allSyncJobsData.Any())
+        public async Task ExecuteJobByNameAsync(string name)
+        {          
+            var sync = await _syncRepository.GetSyncByExpressionAsync(s => s.Name == name);
+            if (sync != null && !sync.Synchronized)
             {
-                string[] arr = new string[]
-                {
-                    ApplicationContants.League, ApplicationContants.Nation, ApplicationContants.Club,ApplicationContants.Player
-                };
-
-                var pagination = new Pagination();
-
-                for (int i = 0, ii = arr.Length; i < ii; i++)
-                {
-                    switch (arr[i])
-                    {
-                        case ApplicationContants.League:
-                            pagination = await _syncJobLeagueService.GetPaginationLeagueAsync(20);
-                            break;
-                        case ApplicationContants.Nation:
-                            pagination = await _syncJobNationService.GetPaginationNationAsync(20);
-                            break;
-                        case ApplicationContants.Club:
-                            pagination = await _syncJobClubService.GetPaginationClubAsync(20);
-                            break;
-                        case ApplicationContants.Player:
-                            pagination = await _syncJobPlayerService.GetPaginationPlayerAsync(20);
-                            break;
-                        default:
-                            continue;
-                    }
-
-                    var syncData = new SyncData
-                    {
-                        Name = arr[i],
-                        TotalItems = pagination.countTotal,
-                        TotalPages = pagination.pageTotal,
-                        TotalItemsPerPage = pagination.itemsPerPage,
-                        Synchronized = false
-                    };
-
-                    await _syncRepository.InsertAsync(syncData);
-                }
+                await ExecuteJobsAsync(sync);
             }
-        }
 
-        public async Task ExecuteAllJosbsAsync() 
+        }
+        public async Task ExecuteAllJosbsAsync()
         {
             var allSyncJobsData = await _syncRepository.GetAllSyncDatawithIncludeAsync();
 
-            foreach (var sync in allSyncJobsData.Where(x => x.Synchronized == false))
+            foreach (var sync in allSyncJobsData)
             {
                 await ExecuteJobsAsync(sync);
             }
@@ -131,6 +94,53 @@ namespace AOM.FIFA.ManagerPlayer.Sync.Application.Jobs.Services
                 await _syncRepository.UpdateAsync(sync);
             }            
 
+        }
+
+        public async Task SyncPageAsync()
+        {
+            var allSyncJobsData = await _syncRepository.GetAllSyncDatawithIncludeAsync();
+
+            if (!allSyncJobsData.Any())
+            {
+                string[] arr = new string[]
+                {
+                    ApplicationContants.League, ApplicationContants.Nation, ApplicationContants.Club,ApplicationContants.Player
+                };
+
+                var pagination = new Pagination();
+
+                for (int i = 0, ii = arr.Length; i < ii; i++)
+                {
+                    switch (arr[i])
+                    {
+                        case ApplicationContants.League:
+                            pagination = await _syncJobLeagueService.GetPaginationLeagueAsync(20);
+                            break;
+                        case ApplicationContants.Nation:
+                            pagination = await _syncJobNationService.GetPaginationNationAsync(20);
+                            break;
+                        case ApplicationContants.Club:
+                            pagination = await _syncJobClubService.GetPaginationClubAsync(20);
+                            break;
+                        case ApplicationContants.Player:
+                            pagination = await _syncJobPlayerService.GetPaginationPlayerAsync(20);
+                            break;
+                        default:
+                            continue;
+                    }
+
+                    var syncData = new SyncData
+                    {
+                        Name = arr[i],
+                        TotalItems = pagination.countTotal,
+                        TotalPages = pagination.pageTotal,
+                        TotalItemsPerPage = pagination.itemsPerPage,
+                        Synchronized = false
+                    };
+
+                    await _syncRepository.InsertAsync(syncData);
+                }
+            }
         }
 
     }

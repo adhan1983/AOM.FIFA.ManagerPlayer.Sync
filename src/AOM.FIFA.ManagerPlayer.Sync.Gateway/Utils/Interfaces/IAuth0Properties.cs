@@ -1,4 +1,4 @@
-﻿namespace AOM.FIFA.ManagerPlayer.Sync.Application.gRPCClient.Utils.Interfaces
+﻿namespace AOM.FIFA.ManagerPlayer.Sync.Gateway.Utils.Interfaces
 {
     public interface IAuth0Properties
     {
@@ -9,5 +9,9 @@
         string ClientSecret { get; set; }
 
         string Audience { get; set; }
+
+        public string GrantType { get; set; }
+        
+        public string UrlToken { get; set; }
     }
 }

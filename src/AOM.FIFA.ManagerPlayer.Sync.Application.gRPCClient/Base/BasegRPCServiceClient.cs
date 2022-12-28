@@ -1,27 +1,28 @@
-﻿using AOM.FIFA.ManagerPlayer.Sync.Application.gRPCClient.Utils.Interfaces;
-using Auth0.AuthenticationApi;
-using Auth0.AuthenticationApi.Models;
-using Grpc.Core;
+﻿using Grpc.Core;
 using Grpc.Net.Client;
 using System.Threading.Tasks;
+using AOM.FIFA.ManagerPlayer.Sync.Application.gRPCClient.Utils.Interfaces;
+using AOM.FIFA.ManagerPlayer.Sync.Application.gRPCClient.Services.Interfaces;
 
 namespace AOM.FIFA.ManagerPlayer.Sync.Application.gRPCClient.Base
 {
-    public class BasegRPCServiceClient
+
+    public class BasegRPCServiceClient 
     {
-        private readonly IGrpcServer _grpcChannelClient;
-        private readonly IAuth0Properties _auth0Properties;
+        private readonly IGrpcServer _grpcChannelClient;        
         public readonly GrpcChannel channel;
-        public BasegRPCServiceClient(IGrpcServer grpcChannelClient, IAuth0Properties auth0Properties)
+        private readonly IDistributeGRPCServiceCache _distributeGRPCServiceCache;
+
+        public BasegRPCServiceClient(IGrpcServer grpcChannelClient, IDistributeGRPCServiceCache distributeGRPCServiceCache)
         {
-            _grpcChannelClient = grpcChannelClient;
-            _auth0Properties = auth0Properties;
+            _grpcChannelClient = grpcChannelClient;            
             channel = GrpcChannel.ForAddress(_grpcChannelClient.EndPoint);
+            _distributeGRPCServiceCache = distributeGRPCServiceCache;        
         }
 
         public async Task<GrpcChannel> CreateAuthorizedChannel()
         {
-            var accessToken = await GetAccessToken();
+            var accessToken = await _distributeGRPCServiceCache.GetAccessToken();
 
             var credentials = CallCredentials.FromInterceptor((context, metadata) =>
             {
@@ -38,22 +39,6 @@ namespace AOM.FIFA.ManagerPlayer.Sync.Application.gRPCClient.Base
             });
 
             return channel;
-        }
-
-        private async Task<string> GetAccessToken() 
-        {            
-            var auth0Client = new AuthenticationApiClient(_auth0Properties.Domain);
-            
-            var tokenRequest = new ClientCredentialsTokenRequest()
-            {
-                ClientId = _auth0Properties.ClientId,
-                ClientSecret = _auth0Properties.ClientSecret,
-                Audience = _auth0Properties.Audience
-            };
-            
-            var tokenResponse = await auth0Client.GetTokenAsync(tokenRequest);
-
-            return tokenResponse.AccessToken;
-        }
+        }              
     }
 }

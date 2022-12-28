@@ -1,6 +1,7 @@
 ﻿using NSwag.Annotations;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 using AOM.FIFA.ManagerPlayer.Sync.Application.Sync.Interfaces.Services;
 
 namespace AOM.FIFAManagerPlayer.Sync.API.Controllers
@@ -8,6 +9,7 @@ namespace AOM.FIFAManagerPlayer.Sync.API.Controllers
     [Route("api/sync")]
     [ApiController]
     [OpenApiTag("Sync FIFA", Description = "End point responsable for Synchronazation")]
+    [Authorize]
     public class SyncController : ControllerBase
     {
         private readonly ISyncService _syncService;

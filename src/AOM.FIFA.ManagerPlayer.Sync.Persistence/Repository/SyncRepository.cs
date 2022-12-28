@@ -27,7 +27,11 @@ namespace AOM.FIFA.ManagerPlayer.Sync.Persistence.Repository
 
         public async Task<SyncData> GetSyncByExpressionAsync(Expression<Func<SyncData, bool>> expression)
         {
-            var model = await this._fifaSyncDbContext.SyncData.FirstOrDefaultAsync(expression);
+            var model = await this._fifaSyncDbContext.
+                                    SyncData.
+                                    Include(a => a.SyncPages).
+                                    ThenInclude(b => b.SourcesWithoutSync).
+                                    FirstOrDefaultAsync(expression);
 
             return model;
         }

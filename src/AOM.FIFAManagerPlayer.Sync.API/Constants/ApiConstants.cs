@@ -21,6 +21,9 @@
         public const string Address = "GrpcServer:Address";
 
         public const string Auth0Properties = "Auth0Properties";
-
+        public const string Auth0PropertiesDomain = "Auth0Properties:Domain";
+        public const string Auth0PropertiesAudience = "Auth0Properties:Audience";
+        public const string Auth0PropertiesClientId = "Auth0Properties:ClientId";
+        public const string Auth0PropertiesClientSecret = "Auth0Properties:ClientSecret";
     }
 }

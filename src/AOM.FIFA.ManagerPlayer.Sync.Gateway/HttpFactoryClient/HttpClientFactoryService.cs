@@ -9,7 +9,10 @@ using AOM.FIFA.ManagerPlayer.Sync.Gateway.Responses.Player;
 using AOM.FIFA.ManagerPlayer.Sync.Gateway.Utils.Interfaces;
 using AOM.FIFA.ManagerPlayer.Sync.Gateway.Responses.Leagues;
 using AOM.FIFA.ManagerPlayer.Sync.Gateway.HttpFactoryClient.Interfaces;
-
+using System.Collections.Generic;
+using System.Text.Json;
+using System.Net.Http.Headers;
+using System.Text;
 
 namespace AOM.FIFA.ManagerPlayer.Sync.Gateway.HttpFactoryClient
 {
@@ -19,41 +22,16 @@ namespace AOM.FIFA.ManagerPlayer.Sync.Gateway.HttpFactoryClient
         private readonly IFIFAGatewayConfig _fifaGatewayConfig;
         private readonly IFIFAUrl _url;
         private readonly IFIFAUrlQueryString _queryString;
+        private readonly IAuth0Properties _auth0Properties;
 
-        public HttpClientFactoryService(IHttpClientFactory httpClientFactory, IFIFAGatewayConfig fifaGatewayConfig, IFIFAUrl url, IFIFAUrlQueryString queryString)
+        public HttpClientFactoryService(IAuth0Properties auth0Properties, IHttpClientFactory httpClientFactory, IFIFAGatewayConfig fifaGatewayConfig, IFIFAUrl url, IFIFAUrlQueryString queryString)
         {
             this._httpClientFactory = httpClientFactory;
             this._fifaGatewayConfig = fifaGatewayConfig;
             this._url = url;
             this._queryString = queryString;
+            _auth0Properties = auth0Properties ?? throw new ArgumentNullException(nameof(_auth0Properties));
         }
-
-       
-
-        private string BuildUrl(string typeOfRequest, HttpClient httpClient)
-        {
-            string urlRequest = string.Empty;
-            switch (typeOfRequest)
-            {                
-                case "League":
-                    urlRequest = string.Concat(httpClient.BaseAddress, _url.league, _queryString.Page, 1);
-                    break;
-                case "Club":
-                    urlRequest = string.Concat(httpClient.BaseAddress, _url.club);
-                    break;
-                case "Player":
-                    urlRequest = string.Concat(httpClient.BaseAddress, _url.player);
-                    break;
-                case "Nation":
-                    urlRequest = string.Concat(httpClient.BaseAddress, _url.nation);
-                    break;
-                default:
-                    break;
-            }
-
-            return urlRequest;
-        }
-
         private HttpRequestMessage BuildHttpRequestMessage(string urlRequest)
         {
             return new HttpRequestMessage
@@ -93,7 +71,35 @@ namespace AOM.FIFA.ManagerPlayer.Sync.Gateway.HttpFactoryClient
             string urlLeague = string.Concat(_url.nation, _queryString.Page);
 
             return await SendRequestAsync<NationListResponse>(request, urlLeague);
-        }       
+        }
+
+        public async Task<ResponseToKen> GetTokenAsync()
+        {
+            using var client = new HttpClient();
+
+            var paramsRequest = new Dictionary<string, string>();
+
+            paramsRequest.Add("client_id", _auth0Properties.ClientId);
+            paramsRequest.Add("client_secret", _auth0Properties.ClientSecret);
+            paramsRequest.Add("audience", _auth0Properties.Audience);
+            paramsRequest.Add("grant_type", _auth0Properties.GrantType);
+
+            var requestSerialized = JsonSerializer.Serialize(paramsRequest);
+
+            var request = new HttpRequestMessage(HttpMethod.Post, _auth0Properties.UrlToken);
+            request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            request.Content = new StringContent(requestSerialized, Encoding.UTF8);
+            request.Content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+
+            var response = await client.SendAsync(request);
+
+            var result = response.EnsureSuccessStatusCode();            
+
+            var responseToken = await response.DeserializeResponseObj<ResponseToKen>();
+
+            return responseToken;
+        }
+
 
         private async Task<TResponse> SendRequestAsync<TResponse>(Request request, string url) where TResponse : class
         {

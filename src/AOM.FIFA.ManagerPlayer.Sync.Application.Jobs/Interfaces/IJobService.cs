@@ -6,5 +6,6 @@ namespace AOM.FIFA.ManagerPlayer.Sync.Application.Jobs.Interfaces
     {
         Task SyncPageAsync();
         Task ExecuteAllJosbsAsync();
+        Task ExecuteJobByNameAsync(string name);
     }
 }

@@ -11,7 +11,8 @@ namespace AOM.FIFAManagerPlayer.Sync.API.Extensions.ServicesCollectionDependenci
             services.AddScoped<ILeaguegRPCServiceClient, LeaguegRPCServiceClient>();
             services.AddScoped<INationgRPCServiceClient, NationgRPCServiceClient>();
             services.AddScoped<IClubgRPCServiceClient, ClubgRPCServiceClient>();
-            services.AddScoped<IPlayergRPCServiceClient, PlayergRPCServiceClient>();            
+            services.AddScoped<IPlayergRPCServiceClient, PlayergRPCServiceClient>();
+            services.AddScoped<IDistributeGRPCServiceCache, DistributeGRPCServiceCache>();            
 
             return services;
         }

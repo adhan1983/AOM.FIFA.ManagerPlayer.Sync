@@ -1,8 +1,8 @@
-﻿using AOM.FIFA.ManagerPlayer.Api.Constants;
-using AOM.FIFA.ManagerPlayer.Sync.Application.gRPCClient.Utils;
-using AOM.FIFA.ManagerPlayer.Sync.Application.gRPCClient.Utils.Interfaces;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
+using AOM.FIFA.ManagerPlayer.Api.Constants;
+using AOM.FIFA.ManagerPlayer.Gateway.Utils;
 using Microsoft.Extensions.DependencyInjection;
+using AOM.FIFA.ManagerPlayer.Sync.Gateway.Utils.Interfaces;
 
 namespace AOM.FIFAManagerPlayer.Sync.API.Extensions
 {
@@ -20,6 +20,8 @@ namespace AOM.FIFAManagerPlayer.Sync.API.Extensions
                 auth0Properties.ClientSecret = auth0Settings.GetValue<string>("ClientSecret");
                 auth0Properties.ClientId = auth0Settings.GetValue<string>("ClientId");
                 auth0Properties.Audience = auth0Settings.GetValue<string>("Audience");
+                auth0Properties.GrantType = auth0Settings.GetValue<string>("GrantType");
+                auth0Properties.UrlToken = auth0Settings.GetValue<string>("UrlToken");
 
                 return auth0Properties;
             });

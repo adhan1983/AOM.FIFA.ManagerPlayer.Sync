@@ -16,5 +16,7 @@ namespace AOM.FIFA.ManagerPlayer.Sync.Gateway.HttpFactoryClient.Interfaces
         Task<PlayerListResponse> GetPlayersAsync(Request request);
 
         Task<NationListResponse> GetNationsAsync(Request request);
+
+        Task<ResponseToKen> GetTokenAsync();
     }
 }
