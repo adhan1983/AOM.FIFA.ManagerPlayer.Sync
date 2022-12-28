@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Caching.Memory;
-using AOM.FIFA.ManagerPlayer.Sync.Gateway.HttpFactoryClient.Interfaces;
 using AOM.FIFA.ManagerPlayer.Sync.Application.gRPCClient.Services.Interfaces;
-using AOM.FIFA.ManagerPlayer.Sync.Gateway.Responses.Base;
+using AOM.FIFA.ManagerPlayer.Sync.Gateway.HttpFactoryClient.Interfaces;
 
 namespace AOM.FIFA.ManagerPlayer.Sync.Application.gRPCClient.Services
 {
