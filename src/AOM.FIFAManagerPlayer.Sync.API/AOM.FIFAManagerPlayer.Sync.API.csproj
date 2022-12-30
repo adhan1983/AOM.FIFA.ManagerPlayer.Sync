@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
-    <UserSecretsId>ea574999-7bbe-4af2-b25a-4236823ccb90</UserSecretsId>
+    <UserSecretsId>304e2192-653e-468f-b2b8-f1644b7b98fa</UserSecretsId>    
   </PropertyGroup>
 
   <ItemGroup>
@@ -20,12 +20,6 @@
     <ProjectReference Include="..\AOM.FIFA.ManagerPlayer.Sync.Application\AOM.FIFA.ManagerPlayer.Sync.Application.csproj" />
     <ProjectReference Include="..\AOM.FIFA.ManagerPlayer.Sync.Gateway\AOM.FIFA.ManagerPlayer.Sync.Gateway.csproj" />
     <ProjectReference Include="..\AOM.FIFA.ManagerPlayer.Sync.Persistence\AOM.FIFA.ManagerPlayer.Sync.Persistence.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Update="appsettings.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
+  </ItemGroup> 
 
 </Project>

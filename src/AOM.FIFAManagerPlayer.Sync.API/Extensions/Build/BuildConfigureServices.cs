@@ -16,7 +16,7 @@ namespace AOM.FIFA.ManagerPlayer.Api.Extensions.Build
 
             services.AddSwaggerGen(opt =>
             {
-                opt.SwaggerDoc("v1", new OpenApiInfo { Title = "AOM.FIFA.ManagerPlayer.Sync", Version = "v1" });
+                opt.SwaggerDoc("v1", new OpenApiInfo { Title = "AOM.FIFA.ManagerPlayer.Sync.Api", Version = "v1" });
 
                 opt.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                 {
