@@ -32,19 +32,19 @@ namespace AOM.FIFAManagerPlayer.Sync.API.Controllers
             return Ok(result);
         }
 
-        [HttpGet("/ContinuationJob")]
-        public ActionResult ContinuationJob()
-        {
-            var leagueJob = _backgroundJobClient.Enqueue(() =>  _jobService.ExecuteJobByNameAsync(ApplicationContants.League));
+        //[HttpGet("/ContinuationJob")]
+        //public ActionResult ContinuationJob()
+        //{
+        //    var leagueJob = _backgroundJobClient.Enqueue(() =>  _jobService.ExecuteJobByNameAsync(ApplicationContants.League));
                 
-            var continueWithNationJob = _backgroundJobClient.ContinueJobWith(leagueJob, () => _jobService.ExecuteJobByNameAsync(ApplicationContants.Nation));
+        //    var continueWithNationJob = _backgroundJobClient.ContinueJobWith(leagueJob, () => _jobService.ExecuteJobByNameAsync(ApplicationContants.Nation));
             
-            var continueWithClubJob = _backgroundJobClient.ContinueJobWith(continueWithNationJob, () => _jobService.ExecuteJobByNameAsync(ApplicationContants.Club));
+        //    var continueWithClubJob = _backgroundJobClient.ContinueJobWith(continueWithNationJob, () => _jobService.ExecuteJobByNameAsync(ApplicationContants.Club));
             
-            _backgroundJobClient.ContinueJobWith(continueWithClubJob, () => _jobService.ExecuteJobByNameAsync(ApplicationContants.Player));
+        //    _backgroundJobClient.ContinueJobWith(continueWithClubJob, () => _jobService.ExecuteJobByNameAsync(ApplicationContants.Player));
 
-            return Ok(leagueJob);
-        }
+        //    return Ok(leagueJob);
+        //}
         
     }
 }
