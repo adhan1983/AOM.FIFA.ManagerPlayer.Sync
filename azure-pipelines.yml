@@ -39,11 +39,11 @@ stages:
             ArtifactName: 'drop'
             publishLocation: 'Container'
           condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/develop'))
-         - task: AzureRmWebAppDeployment@4
-            inputs:
-              ConnectionType: 'AzureRM'
-              azureSubscription: '$(azureSubscription)'
-              appType: 'webAppLinux'
-              WebAppName: 'aomfifamanagerplayersyncapiwebapp'
-              packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
-              RuntimeStack: 'DOTNETCORE|6.0'
+        - task: AzureRmWebAppDeployment@4
+          inputs:
+            ConnectionType: 'AzureRM'
+            azureSubscription: '$(azureSubscription)'
+            appType: 'webAppLinux'
+            WebAppName: 'aomfifamanagerplayersyncapiwebapp'
+            packageForLinux: '$(Build.ArtifactStagingDirectory)/**/*.zip'
+            RuntimeStack: 'DOTNETCORE|6.0'
