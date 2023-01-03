@@ -1,8 +1,8 @@
 ﻿using System;
-using gRPCLeagueClient;
 using System.Threading.Tasks;
 using AOM.FIFA.ManagerPlayer.Sync.Gateway.Responses.Base;
 using AOM.FIFA.ManagerPlayer.Sync.Application.SyncPage.Data;
+using AOM.FIFA.ManagerPlayer.Sync.Gateway.FIFAManagerRequest;
 using AOM.FIFA.ManagerPlayer.Sync.Application.Jobs.Interfaces;
 using AOM.FIFA.ManagerPlayer.Sync.Application.SourceWithoutSync.Data;
 using AOM.FIFA.ManagerPlayer.Sync.Gateway.HttpFactoryClient.Interfaces;
@@ -20,7 +20,6 @@ namespace AOM.FIFA.ManagerPlayer.Sync.Application.Jobs.Services
             this._leaguegRPCServiceClient = leaguegRPCServiceClient;
         }
 
-
         public async Task<Pagination> GetPaginationLeagueAsync(int totalItemsPerPage) 
         {
             var response = await _httpClientServiceImplementation.GetLeaguesAsync(new Request { MaxItemPerPage = totalItemsPerPage, Page = 1 });
@@ -36,11 +35,11 @@ namespace AOM.FIFA.ManagerPlayer.Sync.Application.Jobs.Services
             {
                 try
                 {
-                    var leagueRequest = new LeagueRequest { Name = item.name, SourceId =  item.id };
+                    var leagueRequest = new FIFAManagerLeagueRequest { Name = item.name, SourceId =  item.id };
                     
-                    var leagueReply = await _leaguegRPCServiceClient.InsertLeagueAsync(leagueRequest);
+                    var leagueResponse = await _httpClientServiceImplementation.SendToFifaManagerLeagueAsync(leagueRequest);
                     
-                    if (leagueReply.Id > 0)
+                    if (leagueResponse.id > 0)
                         syncPageData.TotalSynchronized++;
                 }
                 catch (Exception ex)

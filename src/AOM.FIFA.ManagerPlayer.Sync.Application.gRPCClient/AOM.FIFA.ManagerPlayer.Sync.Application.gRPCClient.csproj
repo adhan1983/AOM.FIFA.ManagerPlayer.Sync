@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
@@ -12,10 +12,10 @@
   </ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Auth0.AuthenticationApi" Version="5.0.0" />
-		<PackageReference Include="Google.Protobuf" Version="3.19.3" />
-		<PackageReference Include="Grpc.Net.Client" Version="2.42.0" />
-		<PackageReference Include="Grpc.Tools" Version="2.43.0">
+		<PackageReference Include="Auth0.AuthenticationApi" Version="7.17.4" />
+		<PackageReference Include="Google.Protobuf" Version="3.21.12" />
+		<PackageReference Include="Grpc.Net.Client" Version="2.50.0" />
+		<PackageReference Include="Grpc.Tools" Version="2.51.0">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>

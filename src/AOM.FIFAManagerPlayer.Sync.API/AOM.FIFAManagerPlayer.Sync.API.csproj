@@ -1,18 +1,21 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
-    <UserSecretsId>304e2192-653e-468f-b2b8-f1644b7b98fa</UserSecretsId>    
+    <TargetFramework>net6.0</TargetFramework>
+    <!--<UserSecretsId>52f34986-d242-46e4-9175-76e31590b7f3</UserSecretsId>-->    
   </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.0" />
+  <ItemGroup>    
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.12" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.0" />
 	  <PackageReference Include="Hangfire" Version="1.7.32" />
 	  <PackageReference Include="Microsoft.Extensions.Caching.Abstractions" Version="7.0.0" />
-	  <PackageReference Include="NSwag.Annotations" Version="13.15.10" />
-	  <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
-	  <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.0" />	  
+	  <PackageReference Include="NSwag.Annotations" Version="13.18.2" />
+	  <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+	  <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.12">
+	    <PrivateAssets>all</PrivateAssets>
+	    <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+	  </PackageReference>	  
   </ItemGroup>
 
   <ItemGroup>

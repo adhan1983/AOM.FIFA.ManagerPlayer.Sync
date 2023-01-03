@@ -13,6 +13,8 @@ using System.Collections.Generic;
 using System.Text.Json;
 using System.Net.Http.Headers;
 using System.Text;
+using Microsoft.Extensions.Caching.Memory;
+using AOM.FIFA.ManagerPlayer.Sync.Gateway.FIFAManagerRequest;
 
 namespace AOM.FIFA.ManagerPlayer.Sync.Gateway.HttpFactoryClient
 {
@@ -23,14 +25,18 @@ namespace AOM.FIFA.ManagerPlayer.Sync.Gateway.HttpFactoryClient
         private readonly IFIFAUrl _url;
         private readonly IFIFAUrlQueryString _queryString;
         private readonly IAuth0Properties _auth0Properties;
+        private readonly IFIFAManager _fifaManager;
+        private IMemoryCache _cache;
 
-        public HttpClientFactoryService(IAuth0Properties auth0Properties, IHttpClientFactory httpClientFactory, IFIFAGatewayConfig fifaGatewayConfig, IFIFAUrl url, IFIFAUrlQueryString queryString)
+        public HttpClientFactoryService(IAuth0Properties auth0Properties, IHttpClientFactory httpClientFactory, IFIFAGatewayConfig fifaGatewayConfig, IFIFAUrl url, IFIFAUrlQueryString queryString, IFIFAManager fifaManager, IMemoryCache cache)
         {
             this._httpClientFactory = httpClientFactory;
             this._fifaGatewayConfig = fifaGatewayConfig;
             this._url = url;
             this._queryString = queryString;
             _auth0Properties = auth0Properties ?? throw new ArgumentNullException(nameof(_auth0Properties));
+            _fifaManager = fifaManager;
+            _cache = cache;
         }
         private HttpRequestMessage BuildHttpRequestMessage(string urlRequest)
         {
@@ -100,6 +106,62 @@ namespace AOM.FIFA.ManagerPlayer.Sync.Gateway.HttpFactoryClient
             return responseToken;
         }
 
+        public async Task<FIFAManagerResponse> SendToFifaManagerLeagueAsync(FIFAManagerLeagueRequest league)
+        {
+            var requestSerialized = JsonSerializer.Serialize(league);
+
+            return await SendToFIFAManagerAsync<FIFAManagerResponse>(requestSerialized, _fifaManager.League);
+        }
+
+        public async Task<FIFAManagerResponse> SendToFifaManagerNationAsync(FIFAManagerNationRequest nation)
+        {
+            var requestSerialized = JsonSerializer.Serialize(nation);
+
+            return await SendToFIFAManagerAsync<FIFAManagerResponse>(requestSerialized, _fifaManager.Nation);
+        }
+
+        public async Task<FIFAManagerResponse> SendToFifaManagerClubAsync(FIFAManagerClubRequest club)
+        {
+            var requestSerialized = JsonSerializer.Serialize(club);
+
+            return await SendToFIFAManagerAsync<FIFAManagerResponse>(requestSerialized, _fifaManager.Club);
+        }
+
+        public async Task<FIFAManagerResponse> SendToFifaManagerPlayerAsync(FIFAManagerPlayerRequest player)
+        {
+            var requestSerialized = JsonSerializer.Serialize(player);
+
+            return await SendToFIFAManagerAsync<FIFAManagerResponse>(requestSerialized, _fifaManager.Player);
+        }
+
+        private async Task<TResponse> SendToFIFAManagerAsync<TResponse>(string request, string url) where TResponse : class
+        {
+            using (var httpClient = _httpClientFactory.CreateClient())
+            {
+                string urlRequest = string.Concat(_fifaManager.BaseAddress, url);
+                
+                string token = await GetAccessToken();
+
+                HttpRequestMessage requestMessage = new HttpRequestMessage();
+
+                requestMessage.Method = HttpMethod.Post;
+                requestMessage.RequestUri = new Uri(urlRequest);
+                requestMessage.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                requestMessage.Content = new StringContent(content: request, encoding: Encoding.UTF8);
+                requestMessage.Content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+                requestMessage.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
+
+                using (var response = await httpClient.SendAsync(requestMessage))
+                {
+                    var responseMessage = response.EnsureSuccessStatusCode();
+                    
+                    var result = await responseMessage.DeserializeResponseObj<TResponse>();
+
+                    return result;
+                }
+            }
+
+        }
 
         private async Task<TResponse> SendRequestAsync<TResponse>(Request request, string url) where TResponse : class
         {
@@ -118,6 +180,30 @@ namespace AOM.FIFA.ManagerPlayer.Sync.Gateway.HttpFactoryClient
                     return result;
                 }
             }
+
+        }
+
+
+        public async Task<string> GetAccessToken()
+        {   
+            var tokenCache = _cache.Get("token");
+
+            if (tokenCache == null)
+            {
+                var responseToken = await GetTokenAsync();
+
+                var cacheEntryOptions = new MemoryCacheEntryOptions()
+                                       .SetSlidingExpiration(TimeSpan.FromDays(60))
+                                       .SetAbsoluteExpiration(TimeSpan.FromDays(70))
+                                       .SetPriority(CacheItemPriority.Normal)
+                                       .SetSize(1024);
+                _cache.Set("token", responseToken.access_token, cacheEntryOptions);
+
+                return responseToken.access_token;
+
+            }
+
+            return tokenCache.ToString();
 
         }
 

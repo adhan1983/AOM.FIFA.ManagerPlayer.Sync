@@ -14,7 +14,15 @@
         public const string Player = "FIFAUrl:Player";
         public const string Nation = "FIFAUrl:Nation";
         public const string Club = "FIFAUrl:Club";
-        
+
+
+
+        public const string FIFAManagerBaseAddress = "FIFAManager:BaseAddress";
+        public const string FIFAManagerLeague = "FIFAManager:League";
+        public const string FIFAManagerPlayer = "FIFAManager:Player";
+        public const string FIFAManagerNation = "FIFAManager:Nation";
+        public const string FIFAManagerClub = "FIFAManager:Club";
+
         public const string Page = "FIFAUrlQueryString:Page";
         public const string Limit = "FIFAUrlQueryString:Limit";
 

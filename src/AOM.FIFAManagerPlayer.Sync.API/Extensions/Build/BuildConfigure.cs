@@ -1,8 +1,12 @@
 ﻿using Hangfire;
+using Hangfire.Dashboard;
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 using AOM.FIFAManagerPlayer.Sync.API.Extensions;
+using Microsoft.Extensions.DependencyInjection;
+using AOM.FIFA.ManagerPlayer.Sync.Gateway.HttpFactoryClient.Interfaces;
 
 namespace AOM.FIFA.ManagerPlayer.Api.Extensions.Build
 {
@@ -25,9 +29,10 @@ namespace AOM.FIFA.ManagerPlayer.Api.Extensions.Build
             app.UseAuthentication();
             app.UseAuthorization();            
 
-            app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
-
-            app.UseHangfireDashboard();
+            app.UseEndpoints(endpoints => 
+            { 
+                endpoints.MapControllers();                
+            });            
 
             app.ApplyMigration();
 
@@ -35,6 +40,12 @@ namespace AOM.FIFA.ManagerPlayer.Api.Extensions.Build
 
             app.AddingCacheDependencies();
 
+            var scope = app.ApplicationServices.CreateScope();
+            
+            var service = scope.ServiceProvider.GetService<IHttpClientFactoryService>();
+
+            app.UseHangfireDashboard("/hangfire",
+                new DashboardOptions { Authorization = new[] { new HangfireDashboardJwtAuthorizationFilter(service) } });
 
         }
     }

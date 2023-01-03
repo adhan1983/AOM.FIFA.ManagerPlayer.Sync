@@ -1,14 +1,14 @@
-﻿using System;
-using gRPCClubClient;
-using System.Threading.Tasks;
-using AOM.FIFA.ManagerPlayer.Sync.Gateway.Responses.Base;
-using AOM.FIFA.ManagerPlayer.Sync.Application.SyncPage.Data;
+﻿using AOM.FIFA.ManagerPlayer.Sync.Application.gRPCClient.Services.Interfaces;
 using AOM.FIFA.ManagerPlayer.Sync.Application.Jobs.Interfaces;
 using AOM.FIFA.ManagerPlayer.Sync.Application.SourceWithoutSync.Data;
+using AOM.FIFA.ManagerPlayer.Sync.Application.SyncPage.Data;
+using AOM.FIFA.ManagerPlayer.Sync.Gateway.FIFAManagerRequest;
 using AOM.FIFA.ManagerPlayer.Sync.Gateway.HttpFactoryClient.Interfaces;
-using AOM.FIFA.ManagerPlayer.Sync.Application.gRPCClient.Services.Interfaces;
+using AOM.FIFA.ManagerPlayer.Sync.Gateway.Responses.Base;
 using AOM.FIFA.ManagerPlayer.Sync.Gateway.Responses.Clubs;
+using System;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace AOM.FIFA.ManagerPlayer.Sync.Application.Jobs.Services
 {
@@ -40,11 +40,11 @@ namespace AOM.FIFA.ManagerPlayer.Sync.Application.Jobs.Services
             {
                 try
                 {
-                    var clubRequest = new ClubRequest { Name = item.name, SourceId =  item.id, SourceLeagueId = item.league.Value };
+                    var clubRequest = new FIFAManagerClubRequest { Name = item.name, SourceId =  item.id, SourceLeagueId = item.league.Value };
                     
-                    var clubReply = await _clubRPCServiceClient.InsertClubAsync(clubRequest);
+                    var clubReply = await _httpClientServiceImplementation.SendToFifaManagerClubAsync(clubRequest);
                     
-                    if (clubReply.Id > 0)
+                    if (clubReply.id > 0)
                         syncPageData.TotalSynchronized++;
                 }
                 catch (Exception ex)

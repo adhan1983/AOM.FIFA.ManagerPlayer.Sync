@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Linq;
-using gRPCPlayerClient;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using AOM.FIFA.ManagerPlayer.Sync.Gateway.Responses.Base;
 using AOM.FIFA.ManagerPlayer.Sync.Gateway.Responses.Player;
 using AOM.FIFA.ManagerPlayer.Sync.Application.SyncPage.Data;
+using AOM.FIFA.ManagerPlayer.Sync.Gateway.FIFAManagerRequest;
 using AOM.FIFA.ManagerPlayer.Sync.Application.Jobs.Interfaces;
 using p = AOM.FIFA.ManagerPlayer.Sync.Gateway.Responses.Player;
 using AOM.FIFA.ManagerPlayer.Sync.Application.SourceWithoutSync.Data;
@@ -52,9 +52,9 @@ namespace AOM.FIFA.ManagerPlayer.Sync.Application.Jobs.Services
                 {
                     var playerRequest = MapToPlayerRequest(player);
 
-                    var playerReply = await _playergRPCServiceClient.InsertPlayerAsync(playerRequest);
+                    var playerReply = await _httpClientServiceImplementation.SendToFifaManagerPlayerAsync(playerRequest);
 
-                    if (playerReply.Id > 0)
+                    if (playerReply.id > 0)
                         syncPageData.TotalSynchronized++;
                 }
                 catch (Exception ex)
@@ -75,9 +75,9 @@ namespace AOM.FIFA.ManagerPlayer.Sync.Application.Jobs.Services
 
         }
 
-        private PlayerRequest MapToPlayerRequest(p.Player player)
+        private FIFAManagerPlayerRequest MapToPlayerRequest(p.Player player)
         {
-            var playerRequest = new PlayerRequest();
+            var playerRequest = new FIFAManagerPlayerRequest();
             
             playerRequest.SourceId = player.id;
             playerRequest.Name = player.name;

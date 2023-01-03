@@ -1,8 +1,8 @@
 ﻿using System;
-using gRPCNationClient;
 using System.Threading.Tasks;
 using AOM.FIFA.ManagerPlayer.Sync.Gateway.Responses.Base;
 using AOM.FIFA.ManagerPlayer.Sync.Application.SyncPage.Data;
+using AOM.FIFA.ManagerPlayer.Sync.Gateway.FIFAManagerRequest;
 using AOM.FIFA.ManagerPlayer.Sync.Application.Jobs.Interfaces;
 using AOM.FIFA.ManagerPlayer.Sync.Application.SourceWithoutSync.Data;
 using AOM.FIFA.ManagerPlayer.Sync.Gateway.HttpFactoryClient.Interfaces;
@@ -39,11 +39,11 @@ namespace AOM.FIFA.ManagerPlayer.Sync.Application.Jobs.Services
             {
                 try
                 {
-                    var nationRequest = new NationRequest { Name = item.name, SourceId =  item.id };
+                    var nationRequest = new FIFAManagerNationRequest { Name = item.name, SourceId =  item.id };
                     
-                    var nationReply = await _nationRPCServiceClient.InsertNationAsync(nationRequest);
+                    var nationResponse = await _httpClientServiceImplementation.SendToFifaManagerNationAsync(nationRequest);
                     
-                    if (nationReply.Id > 0)
+                    if (nationResponse.id > 0)
                         syncPageData.TotalSynchronized++;
                 }
                 catch (Exception ex)

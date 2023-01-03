@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using AOM.FIFA.ManagerPlayer.Sync.Gateway.FIFAManagerRequest;
 using AOM.FIFA.ManagerPlayer.Sync.Gateway.Responses.Base;
 using AOM.FIFA.ManagerPlayer.Sync.Gateway.Responses.Clubs;
 using AOM.FIFA.ManagerPlayer.Sync.Gateway.Responses.Leagues;
@@ -18,5 +19,15 @@ namespace AOM.FIFA.ManagerPlayer.Sync.Gateway.HttpFactoryClient.Interfaces
         Task<NationListResponse> GetNationsAsync(Request request);
 
         Task<ResponseToKen> GetTokenAsync();
+
+        Task<FIFAManagerResponse> SendToFifaManagerLeagueAsync(FIFAManagerLeagueRequest league);
+
+        Task<FIFAManagerResponse> SendToFifaManagerNationAsync(FIFAManagerNationRequest nation);
+
+        Task<FIFAManagerResponse> SendToFifaManagerClubAsync(FIFAManagerClubRequest club);
+
+        Task<FIFAManagerResponse> SendToFifaManagerPlayerAsync(FIFAManagerPlayerRequest player);
+
+        Task<string> GetAccessToken();
     }
 }

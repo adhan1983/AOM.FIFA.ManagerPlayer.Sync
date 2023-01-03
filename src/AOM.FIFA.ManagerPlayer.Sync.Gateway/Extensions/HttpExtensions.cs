@@ -13,6 +13,6 @@ namespace AOM.FIFA.ManagerPlayer.Sync.Gateway.Extensions
             var personObject = JsonSerializer.Deserialize<T>(body);
 
             return personObject;
-        }
+        }        
     }
 }

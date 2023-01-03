@@ -28,10 +28,10 @@ namespace AOM.FIFA.ManagerPlayer.Sync.Application.Jobs.Services
             this._syncJobNationService = syncJobNationService;
             this._syncJobClubService = syncJobClubService;
             this._syncJobPlayerService = syncJobPlayerService;
-        }               
+        }
 
         public async Task ExecuteJobByNameAsync(string name)
-        {          
+        {
             var sync = await _syncRepository.GetSyncByExpressionAsync(s => s.Name == name);
             if (sync != null && !sync.Synchronized)
             {
@@ -47,7 +47,7 @@ namespace AOM.FIFA.ManagerPlayer.Sync.Application.Jobs.Services
             {
                 await ExecuteJobsAsync(sync);
             }
-        }     
+        }
 
         private async Task ExecuteJobsAsync(SyncData sync)
         {
@@ -78,7 +78,7 @@ namespace AOM.FIFA.ManagerPlayer.Sync.Application.Jobs.Services
                         break;
                     case ApplicationContants.Player:
                         var nation = await _syncRepository.GetSyncByExpressionAsync(x => x.Name == ApplicationContants.Nation);
-                        var club = await _syncRepository.GetSyncByExpressionAsync(x => x.Name == ApplicationContants.Club);                        
+                        var club = await _syncRepository.GetSyncByExpressionAsync(x => x.Name == ApplicationContants.Club);
                         if (!(nation.Synchronized && club.Synchronized))
                             continue;
                         await _syncJobPlayerService.SyncJobPlayerAsync(sync.TotalItemsPerPage, syncPageData);
@@ -91,7 +91,7 @@ namespace AOM.FIFA.ManagerPlayer.Sync.Application.Jobs.Services
                 sync.SyncPages.Add(syncPageData);
                 sync.Synchronized = (sync.SyncPages.Max(a => a.Page) == sync.TotalPages);
                 await _syncRepository.UpdateAsync(sync);
-            }            
+            }
 
         }
 

@@ -31,6 +31,20 @@ namespace AOM.FIFA.ManagerPlayer.Api.Extensions
                 return gatewayConfig;
             });
 
+
+            services.AddSingleton<IFIFAManager, FIFAManager>(scope =>
+            {
+                FIFAManager fifaManager = new FIFAManager();
+
+                fifaManager.BaseAddress = configuration.GetValue<string>(ApiConstants.FIFAManagerBaseAddress);
+                fifaManager.League = configuration.GetValue<string>(ApiConstants.FIFAManagerLeague);
+                fifaManager.Player = configuration.GetValue<string>(ApiConstants.FIFAManagerPlayer);
+                fifaManager.Club = configuration.GetValue<string>(ApiConstants.FIFAManagerClub);
+                fifaManager.Nation = configuration.GetValue<string>(ApiConstants.FIFAManagerNation);
+
+                return fifaManager;
+            });
+
             services.AddSingleton<IFIFAUrl, FIFAUrl>(scope => 
             {
                 FIFAUrl urls = new FIFAUrl();
