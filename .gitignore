@@ -19,3 +19,9 @@
 /src/AOM.FIFAManagerPlayer.Sync.API/obj
 /.vs/AOM.FIFA.ManagerPlayer.Sync
 /.vs/ProjectEvaluation
+/src/AOM.FIFA.ManagerPlayer.Sync.Application/bin
+/src/AOM.FIFA.ManagerPlayer.Sync.Application.gRPCClient/bin
+/src/AOM.FIFA.ManagerPlayer.Sync.Application.Jobs/bin
+/src/AOM.FIFA.ManagerPlayer.Sync.Gateway/bin
+/src/AOM.FIFA.ManagerPlayer.Sync.Persistence/bin
+/src/AOM.FIFAManagerPlayer.Sync.API/bin

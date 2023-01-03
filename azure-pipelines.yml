@@ -2,8 +2,7 @@
 trigger:
   branches:
     include:
-    - develop
-    - testing
+    - develop    
     - main
 
 pool:
@@ -16,8 +15,8 @@ stages:
         - task: UseDotNet@2
           inputs:
             packageType: 'sdk'
-            version: '5.0.x'
-          displayName: 'Set SDK to 5.0.x'
+            version: '6.0.x'
+          displayName: 'Set SDK to 6.0.x'
 
         - task: DotNetCoreCLI@2
           inputs:
@@ -32,15 +31,19 @@ stages:
             projects: '$(Build.SourcesDirectory)/src/AOM.FIFAManagerPlayer.Sync.API/AOM.FIFAManagerPlayer.Sync.API.csproj'
             arguments: '-o $(Build.ArtifactStagingDirectory)'
           displayName: 'dotnet publish'
-          condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'))
+          condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/develop'))
 
         - task: PublishBuildArtifacts@1
           inputs:
             PathToPublish: '$(Build.ArtifactStagingDirectory)'
             ArtifactName: 'drop'
             publishLocation: 'Container'
-          condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'))
-
-
-
-
+          condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/develop'))
+         - task: AzureRmWebAppDeployment@4
+            inputs:
+              ConnectionType: 'AzureRM'
+              azureSubscription: '$(azureSubscription)'
+              appType: 'webAppLinux'
+              WebAppName: 'aomfifamanagerplayersyncapiwebapp'
+              packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
+              RuntimeStack: 'DOTNETCORE|6.0'
