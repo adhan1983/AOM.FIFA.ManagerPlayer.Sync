@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using AOM.FIFAManagerPlayer.Sync.API.Extensions;
 using AOM.FIFA.ManagerPlayer.Api.Extensions.ServicesCollectionDependencies;
 using AOM.FIFAManagerPlayer.Sync.API.Extensions.ServicesCollectionDependencies;
+using AOM.FIFA.ManagerPlayer.Api.Constants;
 
 namespace AOM.FIFA.ManagerPlayer.Api.Extensions.Build
 {
@@ -47,6 +48,14 @@ namespace AOM.FIFA.ManagerPlayer.Api.Extensions.Build
                 });
 
             });
+
+            var baseURL = configuration.GetValue<string>(ApiConstants.BaseURL);
+            
+            services.AddCors(options => options.AddDefaultPolicy(
+                       policy =>
+                       {
+                           policy.WithOrigins(baseURL);
+                       }));
 
             services.AddingAuthenticationDependencies(configuration);            
 

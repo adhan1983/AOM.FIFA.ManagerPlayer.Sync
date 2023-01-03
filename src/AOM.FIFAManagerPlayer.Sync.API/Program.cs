@@ -19,8 +19,8 @@ namespace AOM.FIFAManagerPlayer.Jobs.API
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
-                    webBuilder.ConfigureAppConfiguration((context, config) => {
-
+                    webBuilder.ConfigureAppConfiguration((context, config) =>
+                    {
                         var buildCofiguration = config.Build();
                         string kvURL = buildCofiguration["FIFAMANAGERPLAYERSYNCKV:kvURL"];
                         string tenantId = buildCofiguration["FIFAMANAGERPLAYERSYNCKV:TenantId"];
@@ -30,7 +30,6 @@ namespace AOM.FIFAManagerPlayer.Jobs.API
                         var credentials = new ClientSecretCredential(tenantId, clientId, clientSecret);
                         var client = new SecretClient(new System.Uri(kvURL), credentials);
                         config.AddAzureKeyVault(client, new AzureKeyVaultConfigurationOptions());
-
 
                     });
 

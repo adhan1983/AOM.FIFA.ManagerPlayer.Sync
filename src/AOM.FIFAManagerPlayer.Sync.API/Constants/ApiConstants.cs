@@ -28,6 +28,9 @@
 
         public const string Address = "GrpcServer:Address";
 
+        public const string BaseURL = "BaseURL";
+
+
         public const string Auth0Properties = "Auth0Properties";
         public const string Auth0PropertiesDomain = "Auth0Properties:Domain";
         public const string Auth0PropertiesAudience = "Auth0Properties:Audience";
