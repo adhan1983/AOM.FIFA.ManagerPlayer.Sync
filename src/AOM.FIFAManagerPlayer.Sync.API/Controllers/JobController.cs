@@ -24,27 +24,37 @@ namespace AOM.FIFAManagerPlayer.Sync.API.Controllers
             _backgroundJobClient = backgroundJobClient;            
         }
 
-        [HttpGet("/ScheduleJobFromSeconds")]
-        public ActionResult ScheduleJobFromSeconds(int seconds)
-        {
-            var result = _backgroundJobClient.Schedule(() => _jobService.ExecuteAllJosbsAsync(), TimeSpan.FromSeconds(seconds));
+        //[HttpGet("/ScheduleJobFromSeconds")]
+        //public ActionResult ScheduleJobFromSeconds(int seconds)
+        //{
+        //    var result = _backgroundJobClient.Schedule(() => _jobService.ExecuteAllJosbsAsync(), TimeSpan.FromSeconds(seconds));
+
+        //    return Ok(result);
+        //}
+
+        [HttpGet("/ScheduleJobByNameAsync")]
+        public ActionResult ScheduleJobLeagueAsync(string jobName, int seconds)
+        {   
+            var result = _backgroundJobClient.Schedule(() => _jobService.ExecuteJobByNameAsync(jobName), TimeSpan.FromSeconds(seconds));
 
             return Ok(result);
         }
+
+       
 
         //[HttpGet("/ContinuationJob")]
         //public ActionResult ContinuationJob()
         //{
         //    var leagueJob = _backgroundJobClient.Enqueue(() =>  _jobService.ExecuteJobByNameAsync(ApplicationContants.League));
-                
+
         //    var continueWithNationJob = _backgroundJobClient.ContinueJobWith(leagueJob, () => _jobService.ExecuteJobByNameAsync(ApplicationContants.Nation));
-            
+
         //    var continueWithClubJob = _backgroundJobClient.ContinueJobWith(continueWithNationJob, () => _jobService.ExecuteJobByNameAsync(ApplicationContants.Club));
-            
+
         //    _backgroundJobClient.ContinueJobWith(continueWithClubJob, () => _jobService.ExecuteJobByNameAsync(ApplicationContants.Player));
 
         //    return Ok(leagueJob);
         //}
-        
+
     }
 }

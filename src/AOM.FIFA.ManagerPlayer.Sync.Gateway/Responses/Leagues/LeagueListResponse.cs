@@ -17,5 +17,7 @@ namespace AOM.FIFA.ManagerPlayer.Sync.Gateway.Responses.Leagues
     public class FIFAManagerResponse 
     {
         public int id { get; set; }
+        public bool Status { get; set; }
+        public string Message { get; set; }
     }
 }
