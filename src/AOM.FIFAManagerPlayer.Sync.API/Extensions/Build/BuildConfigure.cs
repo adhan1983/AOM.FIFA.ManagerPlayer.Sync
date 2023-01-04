@@ -11,21 +11,28 @@ using AOM.FIFA.ManagerPlayer.Sync.Gateway.HttpFactoryClient.Interfaces;
 namespace AOM.FIFA.ManagerPlayer.Api.Extensions.Build
 {
     public static class BuildConfigure
-    {        
+    {
         public static void Build(this IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();                
-            }
+            
 
             app.UseSwagger();
             app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "AOM.FIFA.ManagerPlayer.Sync.Api v1"));
 
             app.UseHttpsRedirection();
-                
+
             app.UseRouting();
-            app.UseCors();
+
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+                app.UseCors(a => a.AllowAnyOrigin());
+            }            
+            else
+            {
+                app.UseCors();
+            }
+
 
             app.UseAuthentication();
             app.UseAuthorization();            
