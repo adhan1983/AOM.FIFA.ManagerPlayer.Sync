@@ -49,6 +49,9 @@ namespace AOM.FIFA.ManagerPlayer.Api.Extensions.Build
 
             });
 
+            services.AddApplicationInsightsTelemetry();
+
+
             var baseURL = configuration.GetValue<string>(ApiConstants.BaseURL);
             
             services.AddCors(options => options.AddDefaultPolicy(

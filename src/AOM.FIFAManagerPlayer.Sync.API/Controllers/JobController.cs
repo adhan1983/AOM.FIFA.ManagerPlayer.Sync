@@ -3,8 +3,8 @@ using Hangfire;
 using NSwag.Annotations;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
-using AOM.FIFA.ManagerPlayer.Sync.Application.Base.Contants;
 using AOM.FIFA.ManagerPlayer.Sync.Application.Jobs.Interfaces;
+using Microsoft.Extensions.Logging;
 
 namespace AOM.FIFAManagerPlayer.Sync.API.Controllers
 {
@@ -16,12 +16,14 @@ namespace AOM.FIFAManagerPlayer.Sync.API.Controllers
     public class JobController : ControllerBase
     {
         private readonly IJobService _jobService;
-        private readonly IBackgroundJobClient _backgroundJobClient;        
+        private readonly IBackgroundJobClient _backgroundJobClient;
+        private readonly ILogger<JobController> _logger;
 
-        public JobController(IJobService jobService, IBackgroundJobClient backgroundJobClient)
+        public JobController(IJobService jobService, IBackgroundJobClient backgroundJobClient, ILogger<JobController> logger)
         {
             _jobService = jobService;
-            _backgroundJobClient = backgroundJobClient;            
+            _backgroundJobClient = backgroundJobClient;
+            _logger = logger;
         }
 
         //[HttpGet("/ScheduleJobFromSeconds")]
@@ -34,10 +36,23 @@ namespace AOM.FIFAManagerPlayer.Sync.API.Controllers
 
         [HttpGet("/ScheduleJobByNameAsync")]
         public ActionResult ScheduleJobLeagueAsync(string jobName, int seconds)
-        {   
-            var result = _backgroundJobClient.Schedule(() => _jobService.ExecuteJobByNameAsync(jobName), TimeSpan.FromSeconds(seconds));
+        {
+            try
+            {
+                _logger.LogWarning("Calling Schedule");
+                
+                var result = _backgroundJobClient.Schedule(() => _jobService.ExecuteJobByNameAsync(jobName), TimeSpan.FromSeconds(seconds));
 
-            return Ok(result);
+                _logger.LogWarning("end Schedule");
+
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, ex.Message);
+                
+            }
+            return BadRequest();
         }
 
        

@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using AOM.FIFA.ManagerPlayer.Sync.Application.Sync.Interfaces.Services;
+using Microsoft.Extensions.Logging;
 
 namespace AOM.FIFAManagerPlayer.Sync.API.Controllers
 {
@@ -13,16 +14,35 @@ namespace AOM.FIFAManagerPlayer.Sync.API.Controllers
     public class SyncController : ControllerBase
     {
         private readonly ISyncService _syncService;
+        private readonly ILogger<SyncController> _logger;
 
-        public SyncController(ISyncService syncService) => this._syncService = syncService;
+        public SyncController(ISyncService syncService, ILogger<SyncController> logger)
+        {
+            _syncService = syncService;
+            _logger = logger;
+        }
 
         [HttpGet]
         [Route("")]
         public async Task<IActionResult> Get()
         {
-            var response = await _syncService.GetSynchronizationsAsync();
+            try
+            {
+                _logger.LogWarning("Calling GetSynchronizationsAsync");
 
-            return Ok(response);
+                var response = await _syncService.GetSynchronizationsAsync();
+
+                _logger.LogWarning("Calling GetSynchronizationsAsync");
+
+                return Ok(response);
+            }
+            catch (System.Exception ex)
+            {
+                _logger.LogError(ex, ex.Message);               
+                
+            }
+            
+            return BadRequest();
 
         }
 
